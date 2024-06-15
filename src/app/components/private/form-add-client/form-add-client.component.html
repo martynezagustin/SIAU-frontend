@@ -1,0 +1,20 @@
+<section class="section-add-client">
+    <h2>Añade un cliente en los siguientes campos.</h2>
+    <div class="div-add-client">
+        <form (submit)="addClient($event)">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Ingresa el nombre del cliente." [(ngModel)]="name">
+            <label for="lastname" class="form-label">Apellido</label>
+            <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Ingresa el apellido del cliente." [(ngModel)]="lastname">
+            <label for="age" class="form-label">Edad</label>
+            <input type="number" name="age" placeholder="Edad" class="form-control" id="age" [(ngModel)]="age">
+            <label for="address" class="form-label">Dirección</label>
+            <input type="address" name="address" placeholder="Ingresa la dirección." class="form-control" id="address" [(ngModel)]="address">
+            <label for="vehicle-brand">Ingresa la marca del vehículo</label>
+            <input type="text" name="vehicleBrand" placeholder="Ingresa el fabricante del vehículo. Ej. 'Renault'." id="vehicle-brand" class="form-control" [(ngModel)]="vehicleBrand">
+            <label for="vehicle-model">Ingresa el modelo del vehículo</label>
+            <input type="text" name="vehicleModel" placeholder="Ingresa el modelo del vehículo. Ej. 'Sandero'." id="vehicle-model" class="form-control" [(ngModel)]="vehicleModel">
+            <input type="submit" value="Agregar">
+        </form>
+    </div>
+</section>

@@ -1,0 +1,16 @@
+.router-navbar{
+    display: flex!important;
+    margin: 1rem;
+    justify-content: center;
+}
+.identificator-user{
+    padding: 10px;
+
+}
+.btn-logout{
+    border-radius: 5px;
+    padding: 0.4rem;
+    background-color: #ffde59;
+    box-shadow: none;
+    border: none;
+}

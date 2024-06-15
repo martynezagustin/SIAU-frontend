@@ -1,0 +1,12 @@
+.section-add-client {
+    border: 1px solid black;
+    background-color: rgb(230, 230, 230);
+}
+
+.div-add-client {
+    padding: 0.5rem;
+}
+
+input {
+    background-color: #ffde19;
+}

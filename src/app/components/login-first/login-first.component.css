@@ -1,0 +1,40 @@
+form{
+    padding: 0.5rem;
+    border-radius: 5px;
+    background: linear-gradient(to rigth, rgb(200,200,200), rgb(140,140,140))!important;
+    border: 1px solid rgb(100,100,100);
+}
+form input[type="text"], input[type="password"]{
+    border: 1px solid black;
+}
+.form-div{
+    margin: 1rem;
+}
+section{
+    height: 95vh;
+}
+.messagesStatus{
+    margin-top: 8px;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.successfullMessageClass{
+    border: 2px solid green;
+    background-color: rgb(120, 255, 136);
+}
+.errorMessageClass{
+    border: 2px solid red;
+    background-color: rgb(255,120,120);
+}
+.section{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.img-SIAU{
+    background-image: url("https://statics.forbesargentina.com/2022/10/635979405e816.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}

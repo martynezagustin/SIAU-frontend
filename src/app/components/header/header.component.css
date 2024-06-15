@@ -1,0 +1,17 @@
+.navbar{
+    background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
+    url("../../assets/imgs/_ca9b9520-bc91-4ac9-946a-a157a39ecdcf.jpeg");
+    box-shadow: 1px 1px 9px 1px black;
+    margin-bottom: 10px;
+}
+.nav-link{
+    color: white!important;
+}
+.active{
+    font-weight: bolder;
+}
+.navbar-brand{
+    background-color: #ffde59!important;
+    padding: 10px;
+    border-radius: 5px;
+}

@@ -1,0 +1,22 @@
+div{
+    border: 1px solid black;
+}
+.navbar-component{
+    background-color: black;
+    border-radius: 1px solid black;
+    height: 100%;
+}
+li{
+    list-style-type: none;
+    margin: 10px;
+}
+a{
+    color: #ffde19;
+    text-decoration: none;
+}
+a:hover{
+    color: whitesmoke;
+}
+i{
+    padding: 5px;
+}

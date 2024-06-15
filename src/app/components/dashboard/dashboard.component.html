@@ -1,0 +1,10 @@
+<div class="identificator-user">
+    <h2>Bienvenido, {{user.name}} {{user.lastname}}</h2>
+    <button (click)="logout()" class="btn-logout">Cerrar sesion</button>
+</div>
+<div class="router-navbar">
+    <navbar></navbar>
+    <div class="router-outlet">
+        <router-outlet></router-outlet>
+    </div>
+</div>
