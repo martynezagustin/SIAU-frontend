@@ -1,1 +1,21 @@
-<p>clients-list works!</p>
+<div class="clients-div">
+  @for(client of clients; track client.name){
+  <div class="card" style="width: 20rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{client.name}} {{client.lastname}}</h5>
+      <p class="card-text"><strong>Vehículo: </strong>{{client.vehicleBrand}} {{client.vehicleModel}}</p>
+      @if(client.reforms.length > 0){
+
+
+      <h6><strong>Cambios realizados:</strong></h6>
+      <ul>
+        @for(reform of client.reforms; track reform.description){
+        <li>{{reform.description}} -- {{formatDate(reform.date)}}</li>
+        }
+      </ul>
+    }
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+}
+</div>

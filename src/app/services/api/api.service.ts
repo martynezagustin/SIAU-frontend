@@ -11,13 +11,15 @@ export class ApiService {
   getClients(): Observable<any> {
     return this.httpClient.get(`${this.baseUrl}/clients`)
   }
-  addClient(name: string, lastname: string, age: number, address: string, vehicleBrand: string, vehicleModel: string): Observable<any> {
-    const body = { name, lastname, age, address, vehicleBrand, vehicleModel }
+  getReforms(clientId: string):Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}/reforms/client/${clientId}`)
+  }
+  addClient(clientForm:any): Observable<any> {
     const token = localStorage.getItem("token")
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
       "Authorization": `${token}`
     })
-    return this.httpClient.post(`${this.baseUrl}/add-client`, body, { headers })
+    return this.httpClient.post(`${this.baseUrl}/add-client`, clientForm, { headers })
   }
 }
