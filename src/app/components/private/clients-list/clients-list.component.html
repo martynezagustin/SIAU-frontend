@@ -1,21 +1,41 @@
-<div class="clients-div">
-  @for(client of clients; track client.name){
-  <div class="card" style="width: 20rem;">
-    <div class="card-body">
-      <h5 class="card-title">{{client.name}} {{client.lastname}}</h5>
-      <p class="card-text"><strong>Vehículo: </strong>{{client.vehicleBrand}} {{client.vehicleModel}}</p>
-      @if(client.reforms.length > 0){
-
-
-      <h6><strong>Cambios realizados:</strong></h6>
-      <ul>
-        @for(reform of client.reforms; track reform.description){
-        <li>{{reform.description}} -- {{formatDate(reform.date)}}</li>
-        }
-      </ul>
-    }
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="div-father">
+  <div class="d-flex align-items-center">
+    <input type="text" name="search" (keyup)="onKey($event)" placeholder="Ingresa un nombre/apellido."
+      class="form-control mb-3">
   </div>
-</div>
-}
+  <label>
+    <input (change)="toggleFilter()" type="checkbox" class="form-check-input mb-3">
+    Ordenar de reciente a antiguo
+  </label>
+  @if(filteredClients.length === 0){
+  <div class="clients-div">
+    <div>
+      <p>No se han encontrado clientes.</p>
+    </div>
+  </div>
+  }
+  @else{
+
+  <div class="clients-length-1">
+    @for(client of filteredClients; track client.name){
+    <div class="card" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{client.name}} {{client.lastname}}</h5>
+        <h6>{{client.address}}</h6>
+        <h6 class="mt-3"><strong>Teléfono: </strong> {{client.phone}}</h6>
+        <p class="card-text card-vehicle mb-1"><strong>Vehículo: </strong>{{client.vehicleBrand}}
+          {{client.vehicleModel}}</p>
+        <p class="card-km mb-3"><strong>Kilometraje: </strong>{{client.mileage}}km</p>
+        <p>Creado: {{client.createdAt | date:'short'}}</p>
+        <button (click)="deleteClient(client._id)" class="btn btn-danger">Eliminar cliente</button>
+        <a [routerLink]="['/dashboard', userId, 'update-client', client._id]" class="btn btn-light mt-2">Actualizar los
+          datos de {{client.name}}</a>
+        <a [routerLink]="['/dashboard', userId, 'reforms-client', client._id]" class="btn btn-secondary mt-3">Ver
+          registro de operaciones</a>
+      </div>
+    </div>
+    }
+  </div>
+
+  }
 </div>

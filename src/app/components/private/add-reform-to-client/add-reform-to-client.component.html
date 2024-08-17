@@ -1,0 +1,69 @@
+<div class="div-father">
+
+    <div class="clients-length-1">
+
+        <form [formGroup]="formSelect" (submit)="addReformToClient($event)">
+
+            <select class="form-select" formControlName="client" aria-label="Default select example"
+                (change)="changeValue($event)">
+                <option selected class="option-disabled">Seleccione un cliente...</option>
+                @for(client of clients; track client.name){
+                <option id="{{client._id}}">{{client.name}} {{client.lastname}}</option>
+                }
+            </select>
+            @if(clientData){
+                <h2 class="mt-3">Agregar reforma a {{clientData.name}} {{clientData.lastname}}</h2>
+                <div formArrayName="reforms">
+                    <div *ngFor="let reform of reforms.controls; let i = index" [formGroupName]="i">
+                        <hr>
+                        <h4 class="mt-2">Reforma {{i + 1}}</h4>
+                        <label for="description" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="description" formControlName="description" >
+                        <label for="date" class="date">Fecha</label>
+                        <input type="date" name="date" id="date" class="form-control" formControlName="date">
+                        <label for="amount" class="form-label">Monto de la operación</label>
+                        <input type="number" id="amount" name="amount" class="form-control" formControlName="amount">
+                        <label for="order" class="form-label">Orden de boleta</label>
+                        <input type="number" name="order" class="form-control" id="order" formControlName="order">
+                        <div formArrayName="pieces">
+                            <button *ngIf="getPieces(i).controls.length === 0" type="button" class="btn btn-info mt-3 mb-3" (click)="addPiece(i)">Añadir información de número de pieza</button>
+                            <div *ngFor="let piece of getPieces(i).controls; let n = index" [formGroupName]="n">
+                              <h4>Pieza {{ n + 1 }}</h4>
+                              <div class="mt-4 mb-4 piece-div">
+                                <div class="div-description">
+                                  <label for="description">Descripción</label>
+                                  <input type="text" name="description" id="description" placeholder="Ej. 'Filtro'." formControlName="description" class="form-control">
+                                </div>
+                                <div class="div-order">
+                                  <label for="order" class="form-label">Nº de Pieza</label>
+                                  <input type="number" class="form-control" placeholder="Ingresa el número de pieza." formControlName="order">
+                                </div>
+                                <button type="button" (click)="removePiece(i, n)" class="btn btn-danger mt-4">Eliminar pieza</button>
+                              </div>
+                            </div>
+                            @if(getPieces(i).controls.length > 0){
+                              <button type="button" class="btn btn-info mt-3 mb-3" (click)="addPiece(i)">Añadir otra pieza</button>
+                            }
+                          </div>
+                        <div class="mt-2">
+                            <button class="btn btn-danger mr-3" (click)="removeReform(i)">Eliminar reforma</button>
+                        </div>
+                    </div>
+                </div>
+                @if(reforms.length > 0){
+                    
+                    <button type="button" class="btn btn-light mb-4 mt-1" (click)="addReform()">Agregar Otra Reforma</button>
+                    <div class="d-flex justify-items-center">
+                        <input type="submit" class="btn btn-info mt-2" [disabled]="formSelect.invalid" value="Añadir todas las reformas al cliente">
+                    </div>
+                }
+                @if(clientData && reforms.length === 0){
+                    <button class="btn btn-light mt-2" (click)="addReform()">Agregar reforma al cliente</button>
+                }
+            }
+            </form>
+        <div>
+        </div>
+    </div>
+
+</div>

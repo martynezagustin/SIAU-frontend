@@ -10,7 +10,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit{
-  userId: string | null = ''
+  userId: any = ''
   constructor(private route: ActivatedRoute){}
   ngOnInit(){
     this.userId = this.route.snapshot.paramMap.get("userId")

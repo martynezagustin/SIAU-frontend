@@ -11,7 +11,7 @@ form input[type="text"], input[type="password"]{
     margin: 1rem;
 }
 section{
-    height: 95vh;
+    height: 93vh;
 }
 .messagesStatus{
     margin-top: 8px;
@@ -34,7 +34,13 @@ section{
     grid-template-columns: 50% 50%;
 }
 .img-SIAU{
-    background-image: url("https://statics.forbesargentina.com/2022/10/635979405e816.jpg");
+    background-image: url("../../assets/imgs/IMG_0915.JPG");
     background-size: cover;
     background-repeat: no-repeat;
+}
+@media screen and (max-width: 865px) {
+    form{
+        border: none;
+        padding: 0.2rem;
+    }
 }

@@ -1,9 +1,8 @@
-.section-add-client {
+.section-update-client {
     border: 1px solid black;
     background-color: rgb(230, 230, 230);
 }
-
-.div-add-client {
+.div-update-client {
     padding: 0.5rem;
 }
 .div-description, .div-order{
@@ -12,11 +11,4 @@
 }
 input {
     background-color: #ffde19;
-}
-.piece-div{
-    background-color: whitesmoke;
-    padding: 5px;
-    margin: 0.4rem;
-    border-radius: 10px;
-    border: 1px solid gray;
 }

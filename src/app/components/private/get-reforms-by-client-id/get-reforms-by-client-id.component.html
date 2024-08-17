@@ -1,0 +1,20 @@
+<div class="div-father">
+    <button class="btn btn-danger mb-1" (click)="back()">Atrás</button>
+    <h2>Cambios realizados a {{clientData.name}} {{clientData.lastname}}</h2>
+    <div class="reforms">
+        @if(reforms.length === 0){
+            <div>
+                <p>No hay reformas del cliente.</p>
+            </div>
+        }
+        @for(reform of reforms; track reform.description){
+            <div class="reform">
+                <h2>{{reform.description}}</h2>
+                <span class="reform-amount-span">MONTO</span> <h4>${{reform.amount}} pesos.</h4>
+                <span class="reform-date-span">FECHA</span> <h4>{{formatDate(reform.date)}}</h4>
+                <button class="btn btn-danger mt-2" (click)="deleteReform(reform._id)">Eliminar Registro</button>
+                <a [routerLink]="[reform._id]" class="btn btn-info mt-2">Ver información</a>
+            </div>
+        }
+    </div>
+</div>

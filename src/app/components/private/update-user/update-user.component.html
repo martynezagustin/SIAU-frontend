@@ -1,0 +1,30 @@
+<div class="div-father">
+    <div class="div-update-user">
+        <form [formGroup]="formUser" (ngSubmit)="updateUser()">
+            <label class="form-label" for="name">Nombre</label>
+            <input type="text" class="form-control" formControlName="name" id="name" name="name" placeholder="Nombre">
+            <label for="form-label" form="lastname">Apellido</label>
+            <input type="text" class="form-control" formControlName="lastname" id="lastname" name="lastname"
+                placeholder="Apellido">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" name="email"
+                placeholder="Correo electrónico">
+            <label for="username" class="form-label">Nombre de usuario</label>
+            <input type="text" class="form-control" id="username" formControlName="username" name="username"
+                placeholder="Nombre de usuario">
+            <label for="currentPassword" class="form-label">Ingrese su contraseña</label>
+            <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword" name="currentPassword"
+                placeholder="Contraseña">
+            <input type="submit" class="btn btn-info mt-2" value="Actualizar mis datos">
+        </form>
+        <div *ngIf="messageSuccessfully && !messageErrorForInvalidCurrentPassword" class="alert alert-success mt-2" role="alert">
+            {{messageSuccessfully}}
+        </div>
+        <div *ngIf="messageErrorForInvalidCurrentPassword && !messageSuccessfully" class="alert alert-danger mt-2">
+            {{messageErrorForInvalidCurrentPassword}}
+        </div>
+        <div>
+            <a [routerLink]="['/dashboard', userId, 'update-password']" class="mt-2">Deseo actualizar mi contraseña.</a>
+        </div>
+    </div>
+</div>

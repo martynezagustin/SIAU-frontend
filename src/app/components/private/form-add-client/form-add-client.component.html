@@ -1,28 +1,78 @@
-<section class="section-add-client">
+<section class="section-add-client p-1">
     <h2>Añade un cliente en los siguientes campos.</h2>
     <div class="div-add-client">
-        <form [formGroup]="formClient" (ngSubmit)="addClient($event)">
-            <label for="name" class="form-label">Nombre</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="Ingresa el nombre del cliente."
-                formControlName="name">
-            <label for="lastname" class="form-label">Apellido</label>
-            <input type="text" name="lastname" class="form-control" id="lastname"
-                placeholder="Ingresa el apellido del cliente." formControlName="lastname">
-            <label for="age" class="form-label">Edad</label>
-            <input type="number" name="age" placeholder="Edad" class="form-control" id="age" formControlName="age">
-            <label for="address" class="form-label">Dirección</label>
-            <input type="address" name="address" placeholder="Ingresa la dirección." class="form-control" id="address"
-                formControlName="address">
-            <label for="vehicle-brand">Ingresa la marca del vehículo</label>
-            <input type="text" name="vehicleBrand" placeholder="Ingresa el fabricante del vehículo. Ej. 'Renault'."
-                id="vehicle-brand" class="form-control" formControlName="vehicleBrand">
-            <label for="vehicle-model">Ingresa el modelo del vehículo</label>
-            <input type="text" name="vehicleModel" placeholder="Ingresa el modelo del vehículo. Ej. 'Sandero'."
-                id="vehicle-model" class="form-control" formControlName="vehicleModel">
-            <label for="reform">Ingresa la reforma realizada</label>
-            <input type="text" name="reform" placeholder="Ingresa la reforma realizada. Ej. 'Cambio de aceite'."
-                id="reform" class="form-control" formControlName="reform">
-            <input type="submit" value="Agregar">
-        </form>
+      <form [formGroup]="formClient" (ngSubmit)="addClient($event)">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Ingresa el nombre del cliente." formControlName="name">
+        <label for="lastname" class="form-label">Apellido</label>
+        <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Ingresa el apellido del cliente." formControlName="lastname">
+        <label for="age" class="form-label">Edad</label>
+        <input type="number" name="age" placeholder="Edad" class="form-control" id="age" formControlName="age">
+        <label for="address" class="form-label">Dirección</label>
+        <input type="text" name="address" placeholder="Ingresa la dirección." class="form-control" id="address" formControlName="address">
+        <label for="phone" class="form-label">Teléfono</label>
+        <input type="text" name="phone" placeholder="Ingresa un teléfono." class="form-control" id="phone" formControlName="phone">
+        <label for="vehicle-brand">Ingresa la marca del vehículo</label>
+        <input type="text" name="vehicleBrand" placeholder="Ingresa el fabricante del vehículo. Ej. 'Renault'." id="vehicle-brand" class="form-control" formControlName="vehicleBrand">
+        <label for="vehicle-model">Ingresa el modelo del vehículo</label>
+        <input type="text" name="vehicleModel" placeholder="Ingresa el modelo del vehículo. Ej. 'Sandero'." id="vehicle-model" class="form-control" formControlName="vehicleModel">
+        <label for="mileage" class="form-label">Kilometraje del vehículo</label>
+        <input type="number" class="form-control" name="mileage" formControlName="mileage" id="mileage">
+  
+        <!-- Este es un array de forms para las reformas -->
+        <div formArrayName="reforms">
+          <button *ngIf="reforms.controls.length === 0" type="button" class="btn btn-secondary mt-3" (click)="addReform()">Haz click para añadir una reforma</button>
+          <div *ngFor="let reform of reforms.controls; let i = index" [formGroupName]="i">
+            <hr>
+            <h4>Reforma {{ i + 1 }}</h4>
+            <label for="description" class="form-label">Descripción</label>
+            <input id="description" class="form-control" formControlName="description" placeholder="Ej. 'Cambio de válvula'." />
+            <div class="d-flex align-items-center mt-4 mb-4">
+              <div>
+                <label for="date" class="form-label">Fecha</label>
+                <input id="date" class="form-control" type="date" formControlName="date" />
+              </div>
+              <div>
+                <label for="amount" class="form-label">Monto de la operación</label>
+                <input type="number" class="form-control" formControlName="amount">
+              </div>
+              <div>
+                <label for="order" class="form-label">Orden de boleta</label>
+                <input type="number" class="form-control" formControlName="order">
+              </div>
+            </div>
+            <div formArrayName="pieces">
+              <button *ngIf="getPieces(i).controls.length === 0" type="button" class="btn btn-info mt-3 mb-3" (click)="addPiece(i)">Añadir información de número de pieza</button>
+              <div *ngFor="let piece of getPieces(i).controls; let n = index" [formGroupName]="n">
+                <h4>Pieza {{ n + 1 }}</h4>
+                <div class="mt-4 mb-4 piece-div">
+                  <div class="div-description">
+                    <label for="description">Descripción</label>
+                    <input type="text" name="description" id="description" placeholder="Ej. 'Filtro'." formControlName="description" class="form-control">
+                  </div>
+                  <div class="div-order">
+                    <label for="order" class="form-label">Nº de Pieza</label>
+                    <input type="number" class="form-control" placeholder="Ingresa el número de pieza." formControlName="order">
+                  </div>
+                  <button type="button" (click)="removePiece(i, n)" class="btn btn-danger mt-4">Eliminar pieza</button>
+                </div>
+              </div>
+              @if(getPieces(i).controls.length > 0){
+                <button type="button" class="btn btn-info mt-3 mb-3" (click)="addPiece(i)">Añadir otra pieza</button>
+              }
+            </div>
+            <button type="button" class="btn btn-danger mt-2" (click)="removeReform(i)">Eliminar Reforma</button>
+            <button type="button" class="btn btn-light mt-2" (click)="addReform()">Agregar Reforma</button>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-warning mt-4" value="Agregar Cliente">
+      </form>
+      <div *ngIf="messageSuccessfully && !messageError" class="alert alert-success mt-2" role="alert">
+        {{messageSuccessfully}}
     </div>
-</section>
+    <div *ngIf="!messageSuccessfully && messageError" class="alert alert-danger mt-2" role="alert">
+        {{messageError}}
+    </div>
+    </div>
+  </section>
+  

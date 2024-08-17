@@ -1,0 +1,44 @@
+<div class="div-father">
+  <button class="btn btn-danger mb-1" (click)="back()">Atrás</button>
+  <button class="btn btn-info mb-1 ml-1" [routerLink]="['/dashboard', userId, 'update-reform', reform._id]">Actualizar reforma</button>
+    <div class="div-child">
+        <div class="column-reform">
+            <h2 class="column-reform__h2">Descripción</h2>
+            <h5>{{reform.description}}</h5>
+            <h2 class="column-reform__h2">Número de orden</h2>
+            <h6>{{reform.order}}</h6>
+        </div>
+        <div class="column-reform">
+            <h2 class="column-reform__h2">Monto</h2>
+            <h5>${{reform.amount}} pesos argentinos.</h5>
+            <h2 class="column-reform__h2">Fecha de la operación</h2>
+            <h5>{{formatDate(reform.date)}}</h5>
+        </div>
+    </div>
+    <hr>
+    <div class="pieces-div">
+      <h2>PIEZAS DE LA REFORMA</h2>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Pieza de la reforma</th>
+                <th scope="col">Número de orden</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(piece of reform.pieces; track piece.description){
+                <tr>
+                  <td scope="row">{{piece.description}}</td>
+                  <td>{{piece.order}}</td>
+                </tr>
+              }
+              @if(reform.pieces.length === 0){
+                <tr>
+                  <td style="color:red">No se han encontrado piezas.</td>
+                  <td></td>
+                </tr>
+              }
+            </tbody>
+          </table>
+    </div>
+</div>

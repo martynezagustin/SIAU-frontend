@@ -1,0 +1,26 @@
+.div-father{
+    background-color: lightgray;
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
+}
+.piece-div{
+    background-color: whitesmoke;
+    padding: 5px;
+    margin: 0.4rem;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+.option-disabled{
+    color: gray;
+}
+.clientData_name_level{
+    margin-bottom: 0%;
+}
+.piece-div{
+    background-color: whitesmoke;
+    padding: 5px;
+    margin: 0.4rem;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
