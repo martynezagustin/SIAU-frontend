@@ -26,8 +26,8 @@ export class LoginFirstComponent {
         localStorage.setItem("userId", response.userId)
         this.router.navigate([`/dashboard/${response.userId}`])
       },
-      () => {
-        this.errorMessage = "Error en las credenciales: incorrectas o inválidas."
+      err => {
+        this.errorMessage = "Error en las credenciales: incorrectas o inválidas: " + err.message
       }
     )
   }

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../../interfaces/client';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  baseUrl: string = "http://localhost:3000"
+  baseUrl: string = environment.apiUrl
   constructor(private httpClient: HttpClient) { }
   private getHeaders():HttpHeaders{
     const token = localStorage.getItem("token")

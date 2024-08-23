@@ -63,7 +63,7 @@ export class ClientsListComponent implements OnInit {
             this.alertService.alert("Una alerta")
           },
           err => {
-            this.alertService.alert("Ha ocurrido un error: " + err)
+            this.alertService.alert("Ha ocurrido un error: " + err.message)
           }
         )
       }

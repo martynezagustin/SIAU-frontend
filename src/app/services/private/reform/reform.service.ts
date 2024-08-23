@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Reform } from '../../../interfaces/reform';
+import { environment } from '../../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Reform } from '../../../interfaces/reform';
 export class ReformService {
 
   constructor(private httpClient: HttpClient) {}
-  private baseUrl: string = "http://localhost:3000"
+  baseUrl: string = environment.apiUrl
   private getHeaders():HttpHeaders{
     const token = localStorage.getItem("token")
     return new HttpHeaders({
