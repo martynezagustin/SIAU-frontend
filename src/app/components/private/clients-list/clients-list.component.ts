@@ -21,6 +21,7 @@ export class ClientsListComponent implements OnInit {
   filteredClients: Client[] = []
   userId: string | null = ''
   filterByDate: Boolean = false
+  messageErrorForGetClients: string = ""
   constructor(private apiService: ApiService, private confirmationService: ConfirmationService, private alertService: AlertService, private authService: AuthService) { }
   ngOnInit(): void {
     this.apiService.getClients().subscribe(
@@ -29,14 +30,14 @@ export class ClientsListComponent implements OnInit {
         this.filteredClients = response
       },
       error => {
-        console.error(error);
+        this.messageErrorForGetClients = error;
 
       }
     )
     this.userId = this.authService.getUserId()
   }
   onKey(event: any): void {
-    const searchTerm = event.target.value.toLowerCase().trim()
+    const searchTerm = event.target.value.toLowerCase()
     this.filteredClients = this.clients.filter(c =>
       c.name.toLowerCase().includes(searchTerm) ||
       c.lastname.toLowerCase().includes(searchTerm)
@@ -53,17 +54,16 @@ export class ClientsListComponent implements OnInit {
     } else {
       this.onKey({target: {value: ''}})
     }
-    console.log(this.filterByDate);
   }
-  deleteClient(clientId: string) {
+  deleteClient(clientId: string, event: Event) {
     this.confirmationService.confirm("¿Está seguro que desea eliminar al cliente?").then((confirmed) => {
       if (confirmed) {
         this.apiService.deleteClient(clientId).subscribe(
           () => {
-            this.alertService.alert("Se ha eliminado exitosamente el cliente.")
+            this.alertService.alert("Una alerta")
           },
           err => {
-            console.log(err);
+            this.alertService.alert("Ha ocurrido un error: " + err)
           }
         )
       }

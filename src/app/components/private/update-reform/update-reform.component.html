@@ -1,29 +1,43 @@
 <div class="div-father">
     @if(reform){
-        <form [formGroup]="reformForm" (ngSubmit)="updateReform()">
-           <label for="description" class="form-label">Descripción</label>
-           <input type="text" id="description" name="description" formControlName="description" class="form-control">
-           <label for="description" class="form-label">Fecha</label>
-           <input type="date" id="date" name="date" formControlName="date" class="form-control"> 
-           <label for="amount" class="form-label">Monto de la operación</label>
-           <input type="number" id="amount" name="amount" formControlName="amount" class="form-control">
-           <label for="order" class="form-label">Orden de boleta</label>
-           <input type="number" id="order" name="order" formControlName="order" class="form-control">
-           <div formArrayName="pieces">
-            <div *ngFor="let piece of pieces.controls; let i = index" [formGroupName]="i" class="piece-div">
-                <label for="piece-description-{{i}}" class="form-label">Descripción de la pieza</label>
-                <input type="text" id="piece-description-{{i}}" formControlName="description" class="form-control">
+    <h2>Actualizar reforma</h2>
+    <form [formGroup]="reformForm" (ngSubmit)="updateReform()">
+        <label for="description" class="form-label">Descripción</label>
+        <input type="text" id="description" name="description" formControlName="description" class="form-control">
+        <label for="description" class="form-label">Fecha</label>
+        <input type="date" id="date" name="date" formControlName="date" class="form-control">
+        <label for="amount" class="form-label">Monto de la operación</label>
+        <input type="number" id="amount" name="amount" formControlName="amount" class="form-control">
+        <label for="order" class="form-label">Orden de boleta</label>
+        <input type="number" id="order" name="order" formControlName="order" class="form-control">
+        <div formArrayName="pieces" class="mt-2">
+            <div *ngFor="let piece of pieces.controls; let i = index" [formGroupName]="i">
+                <hr>
+                <h4>Pieza Nº{{i + 1}}</h4>
+                <div class="piece-div p-3">
 
-                <label for="piece-order-{{i}}" class="form-label">Orden de la pieza</label>
-                <input type="number" id="piece-order-{{i}}" formControlName="order" class="form-control">
+                    <label for="piece-description-{{i}}" class="form-label">Descripción de la pieza</label>
+                    <input type="text" id="piece-description-{{i}}" formControlName="description" class="form-control"
+                        placeholder="Ej. 'Filtro'">
 
-                <button type="button" class="btn btn-danger mt-4" (click)="removePiece(i)">Eliminar Pieza</button>
+                    <label for="piece-order-{{i}}" class="form-label">Orden de la pieza</label>
+                    <input type="number" id="piece-order-{{i}}" formControlName="order" class="form-control">
+
+                    <button type="button" class="btn btn-danger mt-4" (click)="removePiece(i)">Eliminar Pieza</button>
+                </div>
             </div>
-           </div>
-           <button type="button" class="btn btn-info mt-3 mb-3" (click)="addPiece()">Añadir Pieza</button>
-           <div>
-               <input type="submit" value="Actualizar" class="btn btn-light">
-            </div>
-        </form>
+        </div>
+        <button type="button" class="btn btn-info mt-3 mb-3" (click)="addPiece()">Añadir información del número de
+            pieza</button>
+        <div>
+            <input type="submit" value="Actualizar" class="btn btn-light">
+        </div>
+    </form>
+    <div *ngIf="messageSuccessfully && !messageError" class="alert alert-success mt-2" role="alert">
+        {{messageSuccessfully}}
+    </div>
+    <div *ngIf="messageError && !messageSuccessfully" class="alert alert-danger mt-2" role="alert">
+        {{messageError}}
+    </div>
     }
 </div>

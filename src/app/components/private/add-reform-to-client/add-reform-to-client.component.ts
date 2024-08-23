@@ -21,6 +21,7 @@ export class AddReformToClientComponent implements OnInit {
   clientData: any
   clientSelected: Boolean = false
   formSelect: FormGroup
+  messageForErrorToAddReform: string = ""
   constructor(private apiService: ApiService, private fb: FormBuilder, private reformService:ReformService, private router: Router, private authService: AuthService){
     this.formSelect = this.fb.group({
       client: [null, Validators.required],
@@ -49,7 +50,6 @@ export class AddReformToClientComponent implements OnInit {
     this.apiService.getClientById(clientId).subscribe(
       response => {
         this.clientData = response
-        console.log(this.clientData);
 
       }
     )
@@ -58,7 +58,7 @@ export class AddReformToClientComponent implements OnInit {
     return this.fb.group({
       description: ["", Validators.required],
       date: ["", Validators.required],
-      amount: [null, Validators.required],
+      amount: [null],
       order: [null, Validators.required],
       pieces: this.fb.array([])
     });
@@ -97,12 +97,13 @@ export class AddReformToClientComponent implements OnInit {
   addReformToClient(event:Event){
     event.preventDefault()
     this.reformService.addReform(this.selectedOptionId, this.formSelect.value).subscribe(
-      response => {
-        console.log("Exitoso", response);
+    () => {
+        const date = this.formSelect.get("date")?.value
+        
         this.router.navigate([`dashboard/${this.userId}/clients`])
       },
       err=>{
-        console.error(err);
+        this.messageForErrorToAddReform=(err);
       }
     )
   }

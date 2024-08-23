@@ -1,0 +1,10 @@
+.griddy{
+    display: grid;
+    grid-template: "header" 50%
+                   "router"
+                   "footer";
+}
+.header{
+    grid-area: header;
+    background-color: ;
+}

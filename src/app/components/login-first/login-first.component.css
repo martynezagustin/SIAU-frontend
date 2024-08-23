@@ -1,8 +1,12 @@
 form{
     padding: 0.5rem;
+    font-family: "Poppins", sans-serif;
     border-radius: 5px;
     background: linear-gradient(to rigth, rgb(200,200,200), rgb(140,140,140))!important;
     border: 1px solid rgb(100,100,100);
+}
+h2{
+    font-family: "Poppins", sans-serif;
 }
 form input[type="text"], input[type="password"]{
     border: 1px solid black;

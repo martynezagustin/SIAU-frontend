@@ -1,4 +1,4 @@
-<section class="section-add-client p-1">
+<section class="section-add-client">
     <h2>Añade un cliente en los siguientes campos.</h2>
     <div class="div-add-client">
       <form [formGroup]="formClient" (ngSubmit)="addClient($event)">
@@ -30,7 +30,7 @@
             <div class="d-flex align-items-center mt-4 mb-4">
               <div>
                 <label for="date" class="form-label">Fecha</label>
-                <input id="date" class="form-control" type="date" formControlName="date" />
+                <input id="date" class="form-control" type="date" formControlName="date" name="date"/>
               </div>
               <div>
                 <label for="amount" class="form-label">Monto de la operación</label>

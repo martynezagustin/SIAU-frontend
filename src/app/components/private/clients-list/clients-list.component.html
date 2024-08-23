@@ -1,5 +1,6 @@
 <div class="div-father">
   <div class="d-flex align-items-center">
+    <!--Listador de clientes. Falta error de nombre y apellido-->
     <input type="text" name="search" (keyup)="onKey($event)" placeholder="Ingresa un nombre/apellido."
       class="form-control mb-3">
   </div>
@@ -27,9 +28,8 @@
           {{client.vehicleModel}}</p>
         <p class="card-km mb-3"><strong>Kilometraje: </strong>{{client.mileage}}km</p>
         <p>Creado: {{client.createdAt | date:'short'}}</p>
-        <button (click)="deleteClient(client._id)" class="btn btn-danger">Eliminar cliente</button>
-        <a [routerLink]="['/dashboard', userId, 'update-client', client._id]" class="btn btn-light mt-2">Actualizar los
-          datos de {{client.name}}</a>
+        <button (click)="deleteClient(client._id, $event)" class="btn btn-danger">Eliminar cliente</button>
+        <a [routerLink]="['/dashboard', userId, 'update-client', client._id]" class="btn btn-light mt-2 text-align-start">Actualizar datos del cliente</a>
         <a [routerLink]="['/dashboard', userId, 'reforms-client', client._id]" class="btn btn-secondary mt-3">Ver
           registro de operaciones</a>
       </div>

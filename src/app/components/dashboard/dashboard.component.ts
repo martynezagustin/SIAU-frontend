@@ -14,6 +14,7 @@ export class DashboardComponent {
   message: string = ""
   user: any
   tokenActivate: Boolean = true
+  messageForErrorGetData: string =""
   constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router){}
   logout():void{
     this.authService.logout()
@@ -23,11 +24,10 @@ export class DashboardComponent {
     if(userId){
       this.authService.getUserById(userId).subscribe(
         data =>{
-          console.log(data);
           this.user = data
         },
         error => {
-         console.error(error);
+         this.messageForErrorGetData = error
         }
       )
     }
@@ -37,10 +37,8 @@ export class DashboardComponent {
   }
   getToken(): Boolean{
     if(this.authService.getUserToken()?.length === 0){
-      console.log("No hay token");
       return false
     } else {
-      console.log("Bienvenido, token!");
       return true
     }
   }

@@ -11,7 +11,8 @@
             <div class="reform">
                 <h2>{{reform.description}}</h2>
                 <span class="reform-amount-span">MONTO</span> <h4>${{reform.amount}} pesos.</h4>
-                <span class="reform-date-span">FECHA</span> <h4>{{formatDate(reform.date)}}</h4>
+                <span class="reform-date-span">FECHA</span> <h4>{{reform.date}}</h4>
+                <span class="reform-order-span">Nº DE ORDEN</span> <h4>{{reform.order}}</h4>
                 <button class="btn btn-danger mt-2" (click)="deleteReform(reform._id)">Eliminar Registro</button>
                 <a [routerLink]="[reform._id]" class="btn btn-info mt-2">Ver información</a>
             </div>

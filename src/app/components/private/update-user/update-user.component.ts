@@ -18,6 +18,7 @@ export class UpdateUserComponent implements OnInit {
   userDataToUpdate: any
   messageSuccessfully: any
   messageErrorForInvalidCurrentPassword: any
+  messageErrorForGetUserDataByClientById: string = ""
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.formUser = this.fb.group({
       name: ["", Validators.required],
@@ -40,7 +41,7 @@ export class UpdateUserComponent implements OnInit {
         })
       },
       err => {
-        console.error(err);
+        this.messageErrorForGetUserDataByClientById = err;
       }
     )
   }
@@ -52,8 +53,6 @@ export class UpdateUserComponent implements OnInit {
         this.messageErrorForInvalidCurrentPassword = ''
       },
       err => {
-        console.log(err.message);
-        
         this.messageErrorForInvalidCurrentPassword = "La contraseña no es correcta, vuelve a intentarlo."
         this.messageSuccessfully = ''
       }

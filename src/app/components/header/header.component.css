@@ -40,3 +40,23 @@
         width: 35%;
     }
 }
+@media screen and (max-width:521px){
+    .navbar-brand{
+        width: 40%;
+    }
+}
+@media screen and (max-width:463px){
+    .navbar-brand{
+        width: 45%;
+    }
+}
+@media screen and (max-width:418px) {
+    .navbar-brand{
+        width: 50%;
+    }
+}
+@media screen and (max-width:373px) {
+    .navbar-brand{
+        width: 60%;
+    }
+}

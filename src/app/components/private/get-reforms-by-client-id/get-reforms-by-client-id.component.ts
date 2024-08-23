@@ -7,6 +7,7 @@ import { Reform } from '../../../interfaces/reform';
 import { DatePipe } from '@angular/common';
 import { ReformService } from '../../../services/private/reform/reform.service';
 import { ConfirmationService } from '../../../services/confirmation/confirmation.service';
+import { formatDateForInput } from '../../../utils/date-util';
 import { AlertService } from '../../../services/alert/alert.service';
 import { AuthService } from '../../../services/authService/auth.service';
 
@@ -20,9 +21,12 @@ import { AuthService } from '../../../services/authService/auth.service';
 })
 export class GetReformsByClientIdComponent implements OnInit {
   clientId: any = ""
-  userId: string | null = ""
+  private userId: string | null = ""
   clientData: any;
   reforms: Reform[] = []
+  messageErrorForGetReforms: string = ""
+  messageErrorForGetUserId: string = ""
+  messageErrorForDeleteClient: string = ""
   constructor(private route: ActivatedRoute, private reformService: ReformService, private datePipe: DatePipe, private apiService: ApiService, private confirmationService: ConfirmationService, private alertService: AlertService, private router: Router, private authService: AuthService) { }
   ngOnInit() {
     this.clientId = this.route.snapshot.paramMap.get("clientId")
@@ -30,27 +34,25 @@ export class GetReformsByClientIdComponent implements OnInit {
     this.reformService.getReforms(this.clientId).subscribe(
       response => {
         this.reforms = response
-        console.log(this.reforms);
+        this.reforms.forEach((r) => {
+          r.date = formatDateForInput(r.date)
+        })
 
       },
       err => {
-        console.error(err);
+        this.messageErrorForGetReforms = err
 
       }
     )
     this.apiService.getClientById(this.clientId).subscribe(
       response => {
         this.clientData = response
-        console.log(response);
 
       },
       err => {
-        console.error(err);
+        this.messageErrorForGetUserId = err
       }
     )
-  }
-  formatDate(dateString: string) {
-    return this.datePipe.transform(dateString, `yyyy-MM-dd`)
   }
   back() {
     this.router.navigate([`dashboard/${this.userId}/clients`])
@@ -58,13 +60,12 @@ export class GetReformsByClientIdComponent implements OnInit {
   deleteReform(reformId: string) {
     this.confirmationService.confirm("¿Desea eliminar la reforma?").then((confirmed) => {
       if (confirmed) {
-
         this.reformService.deleteReform(reformId).subscribe(
           () => {
-            this.alertService.alert("Borrado exitoso.")
+            this.alertService.alert("Borrado exitoso. Recargue la página (puede usar F5 para esto).")
           },
           err => {
-            console.error(err);
+            this.messageErrorForDeleteClient = err;
 
           }
         )

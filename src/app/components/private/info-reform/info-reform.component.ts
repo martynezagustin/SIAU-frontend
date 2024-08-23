@@ -3,6 +3,7 @@ import { ReformService } from '../../../services/private/reform/reform.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { AuthService } from '../../../services/authService/auth.service';
+import { formatDateForInput } from '../../../utils/date-util';
 
 @Component({
   selector: 'app-info-reform',
@@ -14,9 +15,10 @@ import { AuthService } from '../../../services/authService/auth.service';
 })
 export class InfoReformComponent {
   reform: any
-  private clientId: any = ''
-  userId: any = ''
-  constructor(private reformService: ReformService, private route: ActivatedRoute, private datePipe: DatePipe, private router: Router, private authService: AuthService){}
+  clientId: string | null = ''
+  userId: string | null = ''
+  messageErrorForGetReformById: string = ""
+  constructor(private reformService: ReformService, private route: ActivatedRoute, private router: Router, private authService: AuthService){}
   ngOnInit(){
     const reformId = this.route.snapshot.paramMap.get("reformId")
     this.clientId = this.route.snapshot.paramMap.get("clientId")
@@ -25,14 +27,16 @@ export class InfoReformComponent {
     this.reformService.getReformById(reformId).subscribe(
       response => {
         this.reform = response.reform
+        this.reform.date = formatDateForInput(this.reform.date)
       },
       err => {
-        console.error(err);
+        this.messageErrorForGetReformById = err;
       }
     )
   }
-  formatDate(dateString: string) {
-    return this.datePipe.transform(dateString, `yyyy-MM-dd`)
+  formatDateForInput(dateString: string) {
+    const parsedDate = new Date(dateString)
+    return parsedDate.toISOString().split("T")[0]
   }
   back(){
     this.router.navigate([`dashboard/${this.userId}/reforms-client/${this.clientId}`])

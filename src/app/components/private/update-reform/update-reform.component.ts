@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/authService/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { Reform } from '../../../interfaces/reform';
 import { ReformService } from '../../../services/private/reform/reform.service';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -19,6 +18,9 @@ export class UpdateReformComponent implements OnInit{
   reformId: any
   reform: any
   reformForm: FormGroup
+  messageSuccessfully: any
+  messageError: any
+  messageErrorForGetReformById: string= ""
   constructor(private authService: AuthService, private route: ActivatedRoute, private reformService: ReformService, private fb: FormBuilder, private datePipe: DatePipe){
     this.reformForm = this.fb.group({
       description: ["", Validators.required],
@@ -34,24 +36,21 @@ export class UpdateReformComponent implements OnInit{
     this.reform = this.reformService.getReformById(this.reformId).subscribe(
       response => {
         this.reform = response.reform
-        console.log(this.formatDateForInput(this.reform.date));
-        
-        console.log(this.reform);
-        
         this.reformForm.patchValue({
           description:  this.reform.description,
           date: this.formatDateForInput(this.reform.date),
           amount: this.reform.amount,
-          order: this.reform.order
+          order: this.reform.order,
         })
+        this.setPieces(this.reform.pieces)
       },
       err=> {
-        console.error(err);
+        this.messageErrorForGetReformById = err;
       }
     )
   }
   formatDateForInput(date:any){
-    const parsedDate = new Date(date)
+    const parsedDate = new Date(date).toISOString().split("T")[0]
     return this.datePipe.transform(parsedDate, "yyyy-MM-dd")
   }
   get pieces(): FormArray{
@@ -71,11 +70,13 @@ export class UpdateReformComponent implements OnInit{
   }
   updateReform(){
     this.reformService.updateReform(this.reformId, this.reformForm.value).subscribe(
-      response => {
-        console.log(response);
+      ()=> {
+        this.messageSuccessfully = "Reforma actualizada con éxito."
+        this.messageError = ""
       },
       err => {
-        console.error(err);
+        this.messageError = "Ocurrió un error: " + err.message
+        this.messageSuccessfully = ""
       }
     )
   }

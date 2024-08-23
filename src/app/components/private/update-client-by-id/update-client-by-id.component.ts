@@ -21,6 +21,8 @@ export class UpdateClientByIdComponent implements OnInit {
   clientData: any
   clientDataToUpdate: any
   formClient: FormGroup;
+  messageErrorForGetClientById: string = ""
+  messageErrorForUpdateClient: string = ""
   constructor(private apiService: ApiService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private authService: AuthService, private alertService: AlertService) {
     this.formClient = this.fb.group({
       name: ["", Validators.required],
@@ -42,7 +44,7 @@ export class UpdateClientByIdComponent implements OnInit {
         
       },
       (error) => {
-        console.error(error);
+        this.messageErrorForGetClientById = error;
         
       }
     )
@@ -62,7 +64,7 @@ export class UpdateClientByIdComponent implements OnInit {
         this.router.navigate([`dashboard/${this.userId}/clients`])
       },
       error => {
-        console.error(error);
+        this.messageErrorForUpdateClient = error;
       }
     )
   }

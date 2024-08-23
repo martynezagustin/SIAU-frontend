@@ -1,6 +1,6 @@
 .section-add-client {
-    border: 1px solid black;
     background-color: rgb(230, 230, 230);
+    padding: 1rem;
 }
 
 .div-add-client {
@@ -19,4 +19,14 @@ input {
     margin: 0.4rem;
     border-radius: 10px;
     border: 1px solid gray;
+}
+@media screen and (max-width:792px) {
+    .section-add-client{
+        padding: 0.8rem;
+    }
+}
+@media screen and (max-width:576px) {
+    .section-add-client{
+        padding: 0.3rem;
+    }
 }

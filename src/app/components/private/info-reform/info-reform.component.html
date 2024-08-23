@@ -1,6 +1,6 @@
 <div class="div-father">
   <button class="btn btn-danger mb-1" (click)="back()">Atrás</button>
-  <button class="btn btn-info mb-1 ml-1" [routerLink]="['/dashboard', userId, 'update-reform', reform._id]">Actualizar reforma</button>
+  <button class="btn btn-info mb-1" [routerLink]="['/dashboard', userId, 'update-reform', reform._id]">Actualizar reforma</button>
     <div class="div-child">
         <div class="column-reform">
             <h2 class="column-reform__h2">Descripción</h2>
@@ -10,9 +10,15 @@
         </div>
         <div class="column-reform">
             <h2 class="column-reform__h2">Monto</h2>
-            <h5>${{reform.amount}} pesos argentinos.</h5>
+            @if(!reform.amount){
+              <h5>No se ha especificado un monto.</h5>              
+            }
+            @else{
+              <h5>${{reform.amount}} pesos argentinos.</h5>
+            }
+            
             <h2 class="column-reform__h2">Fecha de la operación</h2>
-            <h5>{{formatDate(reform.date)}}</h5>
+            <h5>{{reform.date}}</h5>
         </div>
     </div>
     <hr>
@@ -22,7 +28,7 @@
             <thead>
               <tr>
                 <th scope="col">Pieza de la reforma</th>
-                <th scope="col">Número de orden</th>
+                <th scope="col">Número de pieza</th>
               </tr>
             </thead>
             <tbody>
