@@ -48,3 +48,21 @@ section{
         padding: 0.2rem;
     }
 }
+@media screen and (max-width: 450px) {
+    .section{
+        grid-template-columns: 100%;
+        grid-template-rows: 50% 50%;
+        grid-template-areas: "login"
+                            "img";
+    }
+    section{
+        height: 100vh;
+    }
+    form{
+        grid-area: login;
+    }
+    .img-SIAU{
+        background-position: initial;
+        grid-area: img;
+    }
+}
