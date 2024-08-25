@@ -41,7 +41,7 @@ export class FormAddClientComponent {
         this.messageError = ""
       },
       error => {
-        this.messageError = error
+        this.messageError = "Hay campos incompletos. Vuelva a intentarlo."
       }
     );
   }

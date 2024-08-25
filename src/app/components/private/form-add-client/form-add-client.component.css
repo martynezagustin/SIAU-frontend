@@ -20,9 +20,18 @@ input {
     border-radius: 10px;
     border: 1px solid gray;
 }
+.reform-data{
+    display: flex;
+}
 @media screen and (max-width:792px) {
     .section-add-client{
         padding: 0.8rem;
+    }
+    .div-description, .div-order{
+        width: 100%!important;
+    }
+    .reform-data{
+        display: inline;
     }
 }
 @media screen and (max-width:576px) {
