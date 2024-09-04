@@ -22,6 +22,8 @@ export class ClientsListComponent implements OnInit {
   userId: string | null = ''
   filterByDate: Boolean = false
   messageErrorForGetClients: string = ""
+  messageSuccessfullyForDeleteClient: string = ""
+  messageErrorForDeleteClient: string = ""
   constructor(private apiService: ApiService, private confirmationService: ConfirmationService, private alertService: AlertService, private authService: AuthService) { }
   ngOnInit(): void {
     this.apiService.getClients().subscribe(
@@ -59,11 +61,15 @@ export class ClientsListComponent implements OnInit {
     this.confirmationService.confirm("¿Está seguro que desea eliminar al cliente?").then((confirmed) => {
       if (confirmed) {
         this.apiService.deleteClient(clientId).subscribe(
-          () => {
-            this.alertService.alert("Una alerta")
+          response => {
+            this.messageSuccessfullyForDeleteClient = response.message
+            this.messageErrorForDeleteClient = ""
+            this.clients = this.clients.filter(c => c._id !== clientId)
+            this.filteredClients = this.filteredClients.filter(c => c._id !== clientId)
           },
           err => {
-            this.alertService.alert("Ha ocurrido un error: " + err.message)
+            this.messageErrorForDeleteClient = err.message
+            this.messageSuccessfullyForDeleteClient = ""
           }
         )
       }
