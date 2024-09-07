@@ -58,13 +58,13 @@ export class UpdateClientByIdComponent implements OnInit {
   updateData() {
     this.clientDataToUpdate = this.formClient.value
     this.apiService.updateClient(this.clientId, this.clientDataToUpdate).subscribe(
-      () => {
-        this.messageSuccessfully = "Cliente actualizado con éxito"
+      response => {
+        this.messageSuccessfully = response.message
         this.alertService.alert(this.messageSuccessfully)
         this.router.navigate([`dashboard/${this.userId}/clients`])
       },
       error => {
-        this.messageErrorForUpdateClient = error;
+        this.messageErrorForUpdateClient = error.message;
       }
     )
   }
