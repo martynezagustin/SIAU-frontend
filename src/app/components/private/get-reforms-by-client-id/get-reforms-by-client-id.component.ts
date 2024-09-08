@@ -62,7 +62,8 @@ export class GetReformsByClientIdComponent implements OnInit {
       if (confirmed) {
         this.reformService.deleteReform(reformId).subscribe(
           () => {
-            this.alertService.alert("Borrado exitoso. Recargue la página (puede usar F5 para esto).")
+            this.reforms = this.reforms.filter(r => r._id !== reformId)
+            this.alertService.alert("Borrado exitoso.")
           },
           err => {
             this.messageErrorForDeleteClient = err;
