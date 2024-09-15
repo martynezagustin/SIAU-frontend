@@ -31,6 +31,7 @@ export class LoginFirstComponent {
         },
         err => {
           this.errorMessage = "Error en las credenciales: incorrectas o inválidas: " + err.message
+          this.loading = false
         }
       )}, 2500);
   }
