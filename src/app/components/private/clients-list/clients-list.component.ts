@@ -24,6 +24,7 @@ export class ClientsListComponent implements OnInit {
   messageErrorForGetClients: string = ""
   messageSuccessfullyForDeleteClient: string = ""
   messageErrorForDeleteClient: string = ""
+  loading: boolean = true
   constructor(private apiService: ApiService, private confirmationService: ConfirmationService, private alertService: AlertService, private authService: AuthService) { }
   ngOnInit(): void {
     setTimeout(() => {  
@@ -31,13 +32,14 @@ export class ClientsListComponent implements OnInit {
         response => {
           this.clients = response
           this.filteredClients = response
+          this.loading = false
         },
         error => {
           this.messageErrorForGetClients = error;
           
         }
       )
-    }, 4000);
+    }, 3000);
     this.userId = this.authService.getUserId()
   }
   onKey(event: any): void {
