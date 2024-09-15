@@ -7,7 +7,7 @@ import { AuthService } from '../../services/authService/auth.service';
 @Component({
   selector: 'login-first',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login-first.component.html',
   styleUrl: './login-first.component.css'
 })
@@ -16,19 +16,22 @@ export class LoginFirstComponent {
   password: string = ""
   errorMessage: string = ""
   successfullMessage: string = ""
-
-  constructor(private authService: AuthService, private router: Router){}
-  login(event: Event):void{
+  loading: boolean = false
+  constructor(private authService: AuthService, private router: Router) { }
+  login(event: Event): void {
+    this.loading = true
     event.preventDefault()
-    this.authService.loginUser(this.username, this.password).subscribe(
-      response => {
-        localStorage.setItem("token", response.token)
-        localStorage.setItem("userId", response.userId)
-        this.router.navigate([`/dashboard/${response.userId}`])
-      },
-      err => {
-        this.errorMessage = "Error en las credenciales: incorrectas o inválidas: " + err.message
-      }
-    )
+    setTimeout(() => {
+      this.authService.loginUser(this.username, this.password).subscribe(
+        response => {
+          localStorage.setItem("token", response.token)
+          localStorage.setItem("userId", response.userId)
+          this.router.navigate([`/dashboard/${response.userId}`])
+          this.loading = false
+        },
+        err => {
+          this.errorMessage = "Error en las credenciales: incorrectas o inválidas: " + err.message
+        }
+      )}, 2500);
   }
 }
