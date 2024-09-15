@@ -26,16 +26,18 @@ export class ClientsListComponent implements OnInit {
   messageErrorForDeleteClient: string = ""
   constructor(private apiService: ApiService, private confirmationService: ConfirmationService, private alertService: AlertService, private authService: AuthService) { }
   ngOnInit(): void {
-    this.apiService.getClients().subscribe(
-      response => {
-        this.clients = response
-        this.filteredClients = response
-      },
-      error => {
-        this.messageErrorForGetClients = error;
-
-      }
-    )
+    setTimeout(() => {  
+      this.apiService.getClients().subscribe(
+        response => {
+          this.clients = response
+          this.filteredClients = response
+        },
+        error => {
+          this.messageErrorForGetClients = error;
+          
+        }
+      )
+    }, 4000);
     this.userId = this.authService.getUserId()
   }
   onKey(event: any): void {

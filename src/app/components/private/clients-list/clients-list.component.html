@@ -8,7 +8,10 @@
     <input (change)="toggleFilter()" type="checkbox" class="form-check-input mb-3">
     Ordenar de reciente a antiguo
   </label>
-  @if(filteredClients.length === 0){
+  @if(loading){
+    <p #loadingInput">Cargando...</p>
+  }
+  @else if(filteredClients.length === 0){
   <div class="clients-div">
     <div>
       <p>No se han encontrado clientes.</p>

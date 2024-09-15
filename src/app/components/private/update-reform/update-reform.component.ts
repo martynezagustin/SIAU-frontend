@@ -21,6 +21,7 @@ export class UpdateReformComponent implements OnInit{
   messageSuccessfully: any
   messageError: any
   messageErrorForGetReformById: string= ""
+  historyLength: number = 0
   constructor(private authService: AuthService, private route: ActivatedRoute, private reformService: ReformService, private fb: FormBuilder, private datePipe: DatePipe){
     this.reformForm = this.fb.group({
       description: ["", Validators.required],
@@ -48,6 +49,7 @@ export class UpdateReformComponent implements OnInit{
         this.messageErrorForGetReformById = err;
       }
     )
+    
   }
   formatDateForInput(date:any){
     const parsedDate = new Date(date).toISOString().split("T")[0]
@@ -79,5 +81,8 @@ export class UpdateReformComponent implements OnInit{
         this.messageSuccessfully = ""
       }
     )
+  }
+  back(){
+    window.history.go(-1)
   }
 }
