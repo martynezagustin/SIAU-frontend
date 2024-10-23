@@ -23,8 +23,10 @@
                         <input type="date" name="date" id="date" class="form-control" formControlName="date">
                         <label for="amount" class="form-label">Monto de la operación</label>
                         <input type="number" id="amount" name="amount" class="form-control" formControlName="amount">
-                        <label for="order" class="form-label">Orden de boleta</label>
-                        <input type="number" name="order" class="form-control" id="order" formControlName="order">
+                        <label for="repairNumber" class="form-label">Número de reparación</label>
+                        <input type="number" name="repairNumber" class="form-control" id="repairNumber" formControlName="repairNumber">
+                        <label for="ticketNumber" class="form-label">Número de boleta</label>
+                        <input type="number" name="ticketNumber" class="form-control" id="ticketNumber" formControlName="ticketNumber">
                         <div formArrayName="pieces">
                             <button *ngIf="getPieces(i).controls.length === 0" type="button" class="btn btn-info mt-3 mb-3" (click)="addPiece(i)">Añadir información de número de pieza</button>
                             <div *ngFor="let piece of getPieces(i).controls; let n = index" [formGroupName]="n">

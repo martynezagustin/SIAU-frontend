@@ -5,12 +5,15 @@
     <form [formGroup]="reformForm" (ngSubmit)="updateReform()">
         <label for="description" class="form-label">Descripción</label>
         <input type="text" id="description" name="description" formControlName="description" class="form-control">
-        <label for="description" class="form-label">Fecha</label>
+        <label for="date" class="form-label">Fecha</label>
         <input type="date" id="date" name="date" formControlName="date" class="form-control">
         <label for="amount" class="form-label">Monto de la operación</label>
         <input type="number" id="amount" name="amount" formControlName="amount" class="form-control">
-        <label for="order" class="form-label">Orden de boleta</label>
-        <input type="number" id="order" name="order" formControlName="order" class="form-control">
+        <!--ACA VA NUMERO DE REPARACION Y DE BOLETA QUEMADITO-->
+        <label for="repairNumber" class="form-label">Número de reparación</label>
+        <input type="number" id="repairNumber" name="repairNumber" formControlName="repairNumber" class="form-control">
+        <label for="ticketNumber" class="form-label">Número de boleta</label>
+        <input type="number" id="ticketNumber" name="ticketNumber" formControlName="ticketNumber" class="form-control">
         <div formArrayName="pieces" class="mt-2">
             <div *ngFor="let piece of pieces.controls; let i = index" [formGroupName]="i">
                 <hr>

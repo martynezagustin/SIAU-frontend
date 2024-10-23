@@ -19,6 +19,13 @@
 .pieces-div_description{
     font-size: 1.4rem;
 }
+.ticketNumberSpan{
+    display: block;
+    margin-bottom: 5px;
+}
+#ticketNumberOfReform{
+    background-color: #FFDD19;
+}
 @media screen and (max-width: 566px){
     .div-child{
         display: block;

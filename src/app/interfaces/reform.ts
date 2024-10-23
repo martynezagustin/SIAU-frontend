@@ -5,6 +5,7 @@ export interface Reform{
     description: string,
     date: string,
     amount: number,
-    order: number,
+    repairNumber: number,
+    ticketNumber: number,
     pieces: Piece[]
 }

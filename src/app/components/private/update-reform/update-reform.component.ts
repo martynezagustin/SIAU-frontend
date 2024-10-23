@@ -27,7 +27,8 @@ export class UpdateReformComponent implements OnInit{
       description: ["", Validators.required],
       date: ["", Validators.required],
       amount: [null, Validators.required],
-      order: [null, Validators.required],
+      repairNumber: [null, Validators.required],
+      ticketNumber: [null, Validators.required],
       pieces: this.fb.array([])
     })
   }
@@ -41,6 +42,8 @@ export class UpdateReformComponent implements OnInit{
           description:  this.reform.description,
           date: this.formatDateForInput(this.reform.date),
           amount: this.reform.amount,
+          repairNumber: this.reform.repairNumber,
+          ticketNumber: this.reform.ticketNumber,
           order: this.reform.order,
         })
         this.setPieces(this.reform.pieces)

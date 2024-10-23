@@ -1,12 +1,18 @@
 <div class="div-father">
   <button class="btn btn-danger mb-1" (click)="back()">Atrás</button>
   <button class="btn btn-info mb-1" [routerLink]="['/dashboard', userId, 'update-reform', reform._id]">Actualizar reforma</button>
+  <span class="ticketNumberSpan">
+    Nº DE BOLETA 
+    <span id="ticketNumberOfReform">
+      {{reform.ticketNumber}}
+    </span>
+  </span>
     <div class="div-child">
         <div class="column-reform">
             <h2 class="column-reform__h2">Descripción</h2>
             <h5>{{reform.description}}</h5>
-            <h2 class="column-reform__h2">Número de orden</h2>
-            <h6>{{reform.order}}</h6>
+            <h2 class="column-reform__h2">Número de reparación</h2>
+            <h6>{{reform.repairNumber}}</h6>
         </div>
         <div class="column-reform">
             <h2 class="column-reform__h2">Monto</h2>
