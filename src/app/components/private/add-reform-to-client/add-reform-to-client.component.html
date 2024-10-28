@@ -37,7 +37,7 @@
                                   <input type="text" name="description" id="description" placeholder="Ej. 'Filtro'." formControlName="description" class="form-control">
                                 </div>
                                 <div class="div-order">
-                                  <label for="order" class="form-label">Nº de Pieza</label>
+                                  <label for="order" class="form-label">Nº de pieza</label>
                                   <input type="number" class="form-control" placeholder="Ingresa el número de pieza." formControlName="order">
                                 </div>
                                 <button type="button" (click)="removePiece(i, n)" class="btn btn-danger mt-4">Eliminar pieza</button>
@@ -52,7 +52,7 @@
                 </div>
                 @if(reforms.length > 0){
                     
-                    <button type="button" class="btn btn-light mb-4 mt-1" (click)="addReform()">Agregar Otra Reforma</button>
+                    <button type="button" class="btn btn-light mb-4 mt-1" (click)="addReform()">Agregar otra reforma</button>
                     <div class="d-flex justify-items-center">
                         <input type="submit" class="btn btn-info mt-2" [disabled]="formSelect.invalid" value="Añadir todas las reformas al cliente">
                     </div>
