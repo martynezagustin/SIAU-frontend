@@ -21,7 +21,7 @@ export class FormAddClientComponent {
     this.formClient = this.fb.group({
       name: ["", Validators.required],
       lastname: ["", Validators.required],
-      age: [0, Validators.required],
+      patentVehicle: ["", Validators.required],
       address: ["", Validators.required],
       phone: ["", [Validators.required, Validators.pattern("[0-9 ]{12}")]],
       vehicleBrand: ["", Validators.required],
