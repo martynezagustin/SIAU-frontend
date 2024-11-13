@@ -27,7 +27,7 @@ export class UpdateClientByIdComponent implements OnInit {
     this.formClient = this.fb.group({
       name: ["", Validators.required],
       lastname: ["", Validators.required],
-      age: [0, Validators.required],
+      patentVehicle: [0, Validators.required],
       address: ["", Validators.required],
       phone: ["", Validators.required],
       vehicleBrand: ["", Validators.required],
