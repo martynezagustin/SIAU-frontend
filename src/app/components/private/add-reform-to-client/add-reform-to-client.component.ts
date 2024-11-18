@@ -59,8 +59,8 @@ export class AddReformToClientComponent implements OnInit {
       description: ["", Validators.required],
       date: ["", Validators.required],
       amount: [null],
-      repairNumber: [null, Validators.required],
-      ticketNumber: [null, Validators.required],
+      repairNumber: ["", Validators.required],
+      ticketNumber: ["", Validators.required],
       pieces: this.fb.array([])
     });
   }

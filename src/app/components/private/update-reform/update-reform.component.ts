@@ -27,8 +27,8 @@ export class UpdateReformComponent implements OnInit{
       description: ["", Validators.required],
       date: ["", Validators.required],
       amount: [null, Validators.required],
-      repairNumber: [null, Validators.required],
-      ticketNumber: [null, Validators.required],
+      repairNumber: ["", Validators.required],
+      ticketNumber: ["", Validators.required],
       pieces: this.fb.array([])
     })
   }
