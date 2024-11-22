@@ -18,7 +18,7 @@ export const privateRoutes: Routes = [
     {path: "update-client/:clientId", component: UpdateClientByIdComponent, canActivate: [AuthGuardService]},
     {path: "reforms-client/:clientId", component: GetReformsByClientIdComponent, canActivate: [AuthGuardService]},
     {path: "reforms-client/:clientId/:reformId", component: InfoReformComponent, canActivate: [AuthGuardService]},
-    {path: "add-reform", component:AddReformToClientComponent, canActivate: [AuthGuardService]},
+    {path: "add-reform/:clientId", component:AddReformToClientComponent, canActivate: [AuthGuardService]},
     {path: "update-password", component:UpdatePasswordToUserComponent, canActivate: [AuthGuardService]},
     {path: "update-user", component: UpdateUserComponent, canActivate: [AuthGuardService]},
     {path: "update-reform/:reformId", component:UpdateReformComponent, canActivate: [AuthGuardService]},

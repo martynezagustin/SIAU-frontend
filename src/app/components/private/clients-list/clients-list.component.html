@@ -9,7 +9,7 @@
     Ordenar de reciente a antiguo
   </label>
   @if(loading){
-    <p #loadingInput>Cargando...</p>
+  <p #loadingInput>Cargando...</p>
   }
   @else if(filteredClients.length === 0){
   <div class="clients-div">
@@ -27,14 +27,24 @@
         <h5 class="card-title">{{client.name}} {{client.lastname}}</h5>
         <h6>{{client.address}}</h6>
         <h6 class="mt-3"><strong>Teléfono: </strong> {{client.phone}}</h6>
+        @if(client.DNI){
+          <h6><strong>DNI</strong>: {{client.DNI}}</h6>
+        }
         <p class="card-text card-vehicle mb-1"><strong>Vehículo: </strong>{{client.vehicleBrand}}
           {{client.vehicleModel}}</p>
         <p class="card-km mb-3"><strong>Kilometraje: </strong>{{client.mileage}}km</p>
         <p>Creado: {{client.createdAt | date:'short'}}</p>
-        <button (click)="deleteClient(client._id, $event)" class="btn btn-danger">Eliminar cliente</button>
-        <a [routerLink]="['/dashboard', userId, 'update-client', client._id]" class="btn btn-light mt-2 text-align-start">Actualizar datos del cliente</a>
-        <a [routerLink]="['/dashboard', userId, 'reforms-client', client._id]" class="btn btn-secondary mt-3">Ver
-          registro de operaciones</a>
+        <div class="grid-two-buttons">
+          <a (click)="deleteClient(client._id, $event)" class="btn btn-danger">Eliminar cliente</a>
+          <a [routerLink]="['/dashboard', userId, 'update-client', client._id]"
+            class="btn btn-light text-align-start">Editar cliente</a>
+        </div>
+        <div class="grid-two-buttons">
+          <a [routerLink]="['/dashboard', userId, 'reforms-client', client._id]" class="btn btn-secondary mt-3">Ver
+            registros</a>
+          <a [routerLink]="['/dashboard', userId, 'add-reform', client._id]" class="btn btn-info mt-3">Agregar
+            registro</a>
+        </div>
       </div>
     </div>
     }

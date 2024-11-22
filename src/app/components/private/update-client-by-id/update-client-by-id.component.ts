@@ -30,6 +30,7 @@ export class UpdateClientByIdComponent implements OnInit {
       patentVehicle: [0, Validators.required],
       address: ["", Validators.required],
       phone: ["", Validators.required],
+      DNI: [null, Validators.required],
       vehicleBrand: ["", Validators.required],
       vehicleModel: ["", Validators.required],
       mileage: ["", Validators.required]

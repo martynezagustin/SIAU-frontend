@@ -24,6 +24,7 @@ export class FormAddClientComponent {
       patentVehicle: ["", Validators.required],
       address: ["", Validators.required],
       phone: ["", [Validators.required, Validators.pattern("[0-9 ]{12}")]],
+      DNI: [null, Validators.required],
       vehicleBrand: ["", Validators.required],
       vehicleModel: ["", Validators.required],
       mileage: [0, Validators.required],
@@ -51,7 +52,7 @@ export class FormAddClientComponent {
       description: ["", Validators.required],
       date: ["", Validators.required],
       amount: [0, Validators.required],
-      repairNumber: ["", Validators.required],
+      repairNumber: [null, Validators.required],
       ticketNumber: ["", Validators.required],
       pieces: this.fb.array([])
     });

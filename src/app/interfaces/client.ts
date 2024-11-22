@@ -5,6 +5,7 @@ export interface Client {
     age: number;
     address: string;
     phone: string;
+    DNI:number,
     vehicleBrand: string;
     vehicleModel: string;
     mileage: number;

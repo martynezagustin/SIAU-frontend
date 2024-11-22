@@ -24,6 +24,10 @@
     font-family: "Poppins", sans-serif;
     padding: 10px;
 }
+.grid-two-buttons{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
 a{
     font-size: 0.8rem;
 }

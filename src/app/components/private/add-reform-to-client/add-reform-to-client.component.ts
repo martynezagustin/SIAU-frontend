@@ -4,8 +4,9 @@ import { Client } from '../../../interfaces/client';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReformService } from '../../../services/private/reform/reform.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/authService/auth.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-add-reform-to-client',
@@ -15,36 +16,32 @@ import { AuthService } from '../../../services/authService/auth.service';
   styleUrl: './add-reform-to-client.component.css'
 })
 export class AddReformToClientComponent implements OnInit {
-  selectedOptionId: string | null = ""
+  clientId: any = ''
   userId: any = ''
   clients: Client [] = []
   clientData: any
-  clientSelected: Boolean = false
   formSelect: FormGroup
   messageForErrorToAddReform: string = ""
-  constructor(private apiService: ApiService, private fb: FormBuilder, private reformService:ReformService, private router: Router, private authService: AuthService){
+  constructor(private apiService: ApiService, private fb: FormBuilder, private reformService:ReformService, private router: Router, private authService: AuthService, private route: ActivatedRoute){
     this.formSelect = this.fb.group({
-      client: [null, Validators.required],
+      client: [null],
       reforms: this.fb.array([this.createReform()])
     })
   }
   ngOnInit(): void {
-    this.apiService.getClients().subscribe(
+    this.userId = this.authService.getUserId()
+    this.clientId = this.route.snapshot.paramMap.get("clientId")
+    this.apiService.getClientById(this.clientId).subscribe(
       response => {
-        this.clients = response.sort(this.SortClients)
+        this.clientData = response
+      },
+      err => {
+        console.error(err)
       }
     )
-    this.userId = this.authService.getUserId()
   }
   SortClients(x:any,y:any){
     return x.name.localeCompare(y.name)
-  }
-  changeValue(event: any): string{
-    const selectElement = event.target as HTMLSelectElement
-    const selectedOption = selectElement.options[selectElement.selectedIndex]
-    this.selectedOptionId = selectedOption.id
-    this.getClientData(this.selectedOptionId)
-    return this.selectedOptionId
   }
   getClientData(clientId:string){
     this.apiService.getClientById(clientId).subscribe(
@@ -58,8 +55,8 @@ export class AddReformToClientComponent implements OnInit {
     return this.fb.group({
       description: ["", Validators.required],
       date: ["", Validators.required],
-      amount: [null],
-      repairNumber: ["", Validators.required],
+      amount: [null, Validators.required],
+      repairNumber: [null, Validators.required],
       ticketNumber: ["", Validators.required],
       pieces: this.fb.array([])
     });
@@ -97,15 +94,18 @@ export class AddReformToClientComponent implements OnInit {
   }
   addReformToClient(event:Event){
     event.preventDefault()
-    this.reformService.addReform(this.selectedOptionId, this.formSelect.value).subscribe(
-    () => {
-        const date = this.formSelect.get("date")?.value
-        
+    this.reformService.addReform(this.clientId, this.formSelect.value).subscribe(
+    (response) => {
+      console.log(response);
+      
         this.router.navigate([`dashboard/${this.userId}/clients`])
       },
       err=>{
         this.messageForErrorToAddReform=(err);
       }
     )
+  }
+  back(){
+    this.router.navigate([`dashboard/${this.userId}/clients`])
   }
 }
